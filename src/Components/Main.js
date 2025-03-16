@@ -11,8 +11,8 @@ const Main = () => {
           <img src={profileImage} alt="Shivam" className="profile-img" />
         </div>
         <div className="hero-text">
-          <h1>Hello, I'm <span className="highlight">Shivam</span></h1>
-          <h2>Full Stack Java Developer</h2>
+          <h1>Hello, I'm <span className="highlight">Divya</span></h1>
+          <h2>Full Stack Developer</h2>
           <p>I specialize in creating robust web applications and responsive user interfaces with modern technologies.</p>
           <div className="hero-buttons">
             <Link to="/projects" className="cta-button primary">View My Work</Link>

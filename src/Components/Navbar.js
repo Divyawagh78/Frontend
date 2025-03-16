@@ -9,7 +9,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
+      if (window.scrollY > 60) {
         setScrolled(true);
       } else {
         setScrolled(false);
@@ -30,7 +30,7 @@ const Navbar = () => {
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <div className="navbar-container">
         <Link to="/" className="navbar-logo">
-          Shivam
+          Divya
         </Link>
 
         <div className={`menu-icon ${menuOpen ? 'active' : ''}`} onClick={toggleMenu}>
