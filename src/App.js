@@ -10,6 +10,8 @@ import ImageComponent from './Components/ImageComponent';
 import About from './Components/About';
 import Projects from './Components/Projects'; // Corrected import
 import ScrollToTop from './Components/ScrollToTop';
+import Login from './Components/Admin/Login';
+import Dashboard from './Components/Admin/Dashboard';
 import './App.css';
 import { Particles } from 'react-tsparticles';
 import { loadSlim } from "tsparticles-slim";
@@ -96,19 +98,33 @@ const App = () => {
         }}
       />
       <Router>
-        <Navbar />
-        <main className="main-content">
-          <Routes>
-            <Route path="/" element={<Main />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/experience" element={<Experience />} />
-            <Route path="/education" element={<Education />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/contact" element={<Contact />} />
-          </Routes>
-        </main>
-        <ScrollToTop />
+        <Routes>
+          {/* Admin Routes */}
+          <Route path="/admin/login" element={<Login />} />
+          <Route path="/admin/dashboard" element={<Dashboard />} />
+          
+          {/* Public Routes */}
+          <Route
+            path="*"
+            element={
+              <>
+                <Navbar />
+                <main className="main-content">
+                  <Routes>
+                    <Route path="/" element={<Main />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/projects" element={<Projects />} />
+                    <Route path="/experience" element={<Experience />} />
+                    <Route path="/education" element={<Education />} />
+                    <Route path="/services" element={<Services />} />
+                    <Route path="/contact" element={<Contact />} />
+                  </Routes>
+                </main>
+                <ScrollToTop />
+              </>
+            }
+          />
+        </Routes>
       </Router>
     </div>
   );

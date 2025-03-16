@@ -1,15 +1,34 @@
 /* Experience Container */
 .experience-container {
-  padding: 80px 20px 40px;
+  padding: 4rem 2rem;
   max-width: 1200px;
   margin: 0 auto;
 }
 
 .experience-title {
-  font-size: 3rem;
-  color: #fff;
-  margin-bottom: 50px;
-  text-align: left;
+  text-align: center;
+  margin-bottom: 3rem;
+  font-size: 2.5rem;
+  background: linear-gradient(45deg, #FFD700, #FFA500);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.experience-timeline {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.experience-timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to bottom, #FFD700, rgba(255, 215, 0, 0.1));
 }
 
 .experience-grid {
@@ -20,20 +39,49 @@
 
 /* Experience Card */
 .experience-card {
+  position: relative;
+  width: calc(50% - 30px);
+  margin: 2rem 0;
+  padding: 1.5rem;
   background: rgba(255, 255, 255, 0.05);
-  border-radius: 15px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  display: flex;
-  flex-direction: column; /* ✅ Keeping Flexbox */
-  min-height: 100%;
-  padding: 30px;
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 215, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.experience-card:nth-child(odd) {
+  left: 0;
+}
+
+.experience-card:nth-child(even) {
+  left: calc(50% + 30px);
+}
+
+.experience-card::before {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: #FFD700;
+  border-radius: 50%;
+  top: 50%;
+}
+
+.experience-card:nth-child(odd)::before {
+  right: -38px;
+  transform: translateY(-50%);
+}
+
+.experience-card:nth-child(even)::before {
+  left: -38px;
+  transform: translateY(-50%);
 }
 
 .experience-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  border-color: rgba(255, 204, 0, 0.3);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 215, 0, 0.3);
 }
 
 /* Experience Content */
@@ -43,34 +91,102 @@
   flex-direction: column;
 }
 
-.job-title {
-  font-size: 1.8rem;
-  margin-bottom: 10px;
-  color: #ffcc00;
+.experience-header {
+  margin-bottom: 1rem;
 }
 
-.company {
-  font-size: 1.2rem;
-  margin-bottom: 10px;
-  color: white;
+.job-title {
+  font-size: 1.5rem;
+  color: #FFD700;
+  margin-bottom: 0.5rem;
+}
+
+.company-name {
+  display: block;
+  font-size: 1.1rem;
+  color: #FFF;
+  margin-bottom: 0.25rem;
 }
 
 .period {
-  font-size: 1rem;
-  margin-bottom: 15px;
+  display: block;
+  font-size: 0.9rem;
   color: rgba(255, 255, 255, 0.7);
 }
 
 .responsibilities {
-  color: rgba(255, 255, 255, 0.8);
-  line-height: 1.6;
-  flex-grow: 1;
+  list-style-type: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.responsibilities li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.responsibilities li::before {
+  content: '▹';
+  position: absolute;
+  left: 0;
+  color: #FFD700;
+}
+
+.skills-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.skill-tag {
+  padding: 0.3rem 0.8rem;
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  color: #FFD700;
+  transition: all 0.3s ease;
+}
+
+.skill-tag:hover {
+  background: rgba(255, 215, 0, 0.2);
+  transform: translateY(-2px);
 }
 
 /* Responsive Fixes */
 @media (max-width: 768px) {
+  .experience-container {
+    padding: 3rem 1rem;
+  }
+
+  .experience-timeline::before {
+    left: 20px;
+  }
+
+  .experience-card {
+    width: calc(100% - 50px);
+    margin-left: 50px;
+  }
+
+  .experience-card:nth-child(odd),
+  .experience-card:nth-child(even) {
+    left: 0;
+  }
+
+  .experience-card::before {
+    left: -38px;
+    transform: translateY(-50%);
+  }
+
   .experience-title {
-    font-size: 2.5rem;
+    font-size: 2rem;
+  }
+
+  .job-title {
+    font-size: 1.3rem;
   }
 }
 

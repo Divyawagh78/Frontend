@@ -1,70 +1,125 @@
-# Getting Started with Create React App
+# Portfolio Website with Admin Dashboard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-stack portfolio website with an admin dashboard for content management.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Modern, responsive portfolio website
+- Secure admin dashboard
+- Project management
+- Experience management
+- Contact form with message management
+- JWT-based authentication
+- MongoDB database
+- File upload capability
 
-### `npm start`
+## Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Frontend:
+  - React.js
+  - React Router
+  - Axios for API calls
+  - Modern CSS with responsive design
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Backend:
+  - Node.js
+  - Express.js
+  - MongoDB with Mongoose
+  - JWT for authentication
+  - CORS enabled
+  - Error handling middleware
 
-### `npm test`
+## Setup Instructions
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. **Clone the repository**
+```bash
+git clone <repository-url>
+cd <repository-name>
+```
 
-### `npm run build`
+2. **Install dependencies**
+```bash
+# Install frontend dependencies
+npm install
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Install backend dependencies
+cd backend
+npm install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. **Environment Setup**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Create `.env` file in the backend directory with:
+```
+PORT=5000
+MONGODB_URI=mongodb://localhost:27017/portfolio
+JWT_SECRET=your_jwt_secret_key
+NODE_ENV=development
+```
 
-### `npm run eject`
+4. **Start MongoDB**
+```bash
+# Windows
+"C:\Program Files\MongoDB\Server\7.0\bin\mongod.exe" --dbpath="c:\data\db"
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+5. **Create Admin User**
+```bash
+cd backend
+node scripts/createAdmin.js
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+6. **Start the Servers**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+In one terminal (backend):
+```bash
+cd backend
+npm start
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+In another terminal (frontend):
+```bash
+npm start
+```
 
-## Learn More
+7. **Access the Application**
+- Frontend: http://localhost:3000
+- Admin Login: http://localhost:3000/admin/login
+- Default admin credentials:
+  - Email: admin@example.com
+  - Password: admin123
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## API Endpoints
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Authentication
+- POST `/api/auth/login` - Login
+- GET `/api/auth/me` - Get current user
 
-### Code Splitting
+### Projects
+- GET `/api/projects` - Get all projects
+- POST `/api/projects` - Create project
+- PUT `/api/projects/:id` - Update project
+- DELETE `/api/projects/:id` - Delete project
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Experience
+- GET `/api/experience` - Get all experiences
+- POST `/api/experience` - Create experience
+- PUT `/api/experience/:id` - Update experience
+- DELETE `/api/experience/:id` - Delete experience
 
-### Analyzing the Bundle Size
+### Contact
+- GET `/api/contact` - Get all messages
+- POST `/api/contact` - Send message
+- DELETE `/api/contact/:id` - Delete message
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Contributing
 
-### Making a Progressive Web App
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## License
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is licensed under the MIT License.
