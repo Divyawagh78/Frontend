@@ -42,15 +42,6 @@ const Navbar = () => {
         <ul className={`nav-menu ${menuOpen ? 'active' : ''}`}>
           <li className="nav-item">
             <Link 
-              to="/" 
-              className={`nav-link ${location.pathname === '/' ? 'active' : ''}`} 
-              onClick={() => setMenuOpen(false)}
-            >
-              Home
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link 
               to="/about" 
               className={`nav-link ${location.pathname === '/about' ? 'active' : ''}`} 
               onClick={() => setMenuOpen(false)}

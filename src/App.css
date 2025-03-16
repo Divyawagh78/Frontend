@@ -1,17 +1,28 @@
 /* App.css */
 
-/* Global reset and common styles */
+/* Global Styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+:root {
+  --primary-color: #4169E1;
+  --secondary-color: #87CEEB;
+  --background-color: #0a0a23;
+  --text-color: #ffffff;
+  --transition: all 0.3s ease;
+}
+
 body {
-  font-family: 'Poppins', sans-serif;
-  color: white;
-  background-color: #0a0a23;
-  overflow-x: hidden;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background-color);
+  color: var(--text-color);
   line-height: 1.6;
 }
 
@@ -136,37 +147,54 @@ body {
   min-height: calc(100vh - 80px);
 }
 
-/* Responsive styles */
-@media (max-width: 992px) {
-  .section-title {
-    font-size: 2.2rem;
-  }
+/* Smooth scrolling for the entire page */
+html {
+  scroll-behavior: smooth;
 }
 
-@media (max-width: 768px) {
-  .section-title {
-    font-size: 2rem;
-  }
-  
-  .section-container {
-    padding: 50px 20px 70px;
-  }
+/* Modern Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
 }
 
-@media (max-width: 480px) {
-  .section-container {
-    padding: 40px 20px 60px;
-  }
-  
-  .section-title {
-    font-size: 1.8rem;
-  }
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
 }
 
-/* Applying Poppins to all headings */
-h1, h2, h3 {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary-color);
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: 3rem;
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+h2 {
+  font-size: 2.5rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+p {
+  margin-bottom: 1rem;
 }
 
 /* Navbar styling */
@@ -258,4 +286,177 @@ html {
 
 .flex-column {
   flex-direction: column;
+}
+
+/* Animation Classes */
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .main-content {
+    padding-top: 60px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .section-container {
+    padding: 40px 20px;
+  }
+
+  .section-title {
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+
+  .section-title:after {
+    width: 80px;
+    bottom: -10px;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  .card {
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .button {
+    padding: 10px 25px;
+    font-size: 1rem;
+  }
+
+  .page-container {
+    padding: 80px 15px 30px;
+  }
+
+  .page-title {
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+  }
+
+  .content-container {
+    padding: 60px 15px 15px;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  .section-container {
+    padding: 30px 15px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+  h3 {
+    font-size: 1.3rem;
+  }
+
+  .button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .card {
+    padding: 15px;
+  }
+
+  .scroll-to-top {
+    bottom: 1rem;
+    right: 1rem;
+    width: 35px;
+    height: 35px;
+  }
+}
+
+/* Prevent content shift when scrollbar appears */
+html {
+  scrollbar-gutter: stable;
+}
+
+/* Improve touch targets for mobile */
+@media (hover: none) and (pointer: coarse) {
+  .button,
+  .nav-link,
+  .card {
+    min-height: 44px; /* Minimum touch target size */
+  }
+
+  .nav-link {
+    padding: 12px 20px;
+  }
+
+  input,
+  select,
+  textarea {
+    font-size: 16px; /* Prevent zoom on focus in iOS */
+  }
+}
+
+/* Grid system for responsive layouts */
+.grid {
+  display: grid;
+  gap: 2rem;
+  width: 100%;
+}
+
+.grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 1024px) {
+  .grid-4 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
 }

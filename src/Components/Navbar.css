@@ -1,49 +1,41 @@
 /* Navbar Container */
 .navbar {
-  background-color: rgb(18, 18, 62);
-  height: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: fixed;
   top: 0;
-  left: 0;
-  right: 0;
   width: 100%;
   z-index: 1000;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  padding: 10px 20px;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease-in-out;
+  backdrop-filter: blur(10px);
+  background: rgba(10, 10, 35, 0.8);
+  padding: 1rem 0;
 }
 
 .navbar.scrolled {
-  background-color: rgba(18, 18, 62, 0.9);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  padding: 0.8rem 0;
 }
 
 .navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-  max-width: 1300px;
-  padding: 0 30px;
-  height: 100%;
 }
 
 /* Logo Styling */
 .navbar-logo {
-  color: yellow;
-  font-size: 1.5rem;
-  font-weight: 700;
+  color: #fff;
   text-decoration: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  font-size: 1.8rem;
+  font-weight: 700;
   letter-spacing: 1px;
+  transition: color 0.3s ease;
 }
 
 .navbar-logo:hover {
-  color: #ff9a00;
-  transform: scale(1.05);
+  color: #4169E1;
 }
 
 /* Nav Menu */
@@ -53,41 +45,35 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  height: 100%;
 }
 
 .nav-item {
-  position: relative; /* Needed for absolute positioning of underline */
-  height: 100%;
-  display: flex;
-  align-items: center;
-  margin: 0 10px;
+  margin: 0 1rem;
 }
 
 /* Nav Links */
 .nav-link {
-  color: white;
+  color: #fff;
   text-decoration: none;
   font-size: 1rem;
   font-weight: 500;
-  padding: 0 5px;
-  height: 100%;
-  display: flex;
-  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
   position: relative;
-  transition: color 0.3s ease;
 }
 
 /* 🔥 Yellow Underline Animation (Starts from Left) */
 .nav-link::after {
-  content: "";
+  content: '';
   position: absolute;
-  background-color: #ffcc00;
-  height: 3px;
+  bottom: 0;
+  left: 50%;
   width: 0;
-  left: 0;  /* Starts from the left */
-  bottom: 0; /* Correct positioning */
-  transition: width 0.3s ease-in-out;
+  height: 2px;
+  background: #4169E1;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
 }
 
 /* Expand animation on hover & active */
@@ -97,11 +83,11 @@
 }
 
 .nav-link:hover {
-  color: yellow;
+  color: #4169E1;
 }
 
 .nav-link.active {
-  color: yellow;
+  color: #4169E1;
 }
 
 /* Hamburger Menu Icon */
@@ -112,108 +98,86 @@
   width: 30px;
   height: 21px;
   cursor: pointer;
-  z-index: 10;
 }
 
 .menu-icon span {
-  display: block;
+  width: 100%;
   height: 3px;
-  width: 25px;
-  background-color: white;
-  border-radius: 3px;
+  background-color: #fff;
   transition: all 0.3s ease;
-  margin: 4px 0;
-}
-
-.menu-icon.active span:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
-}
-
-.menu-icon.active span:nth-child(2) {
-  opacity: 0;
-}
-
-.menu-icon.active span:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -5px);
+  border-radius: 3px;
 }
 
 /* Mobile Menu */
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 768px) {
+  .navbar {
+    padding: 0.8rem 0;
+  }
+
+  .navbar-container {
+    padding: 0 1rem;
+  }
+
+  .navbar-logo {
+    font-size: 1.5rem;
+  }
+
   .menu-icon {
     display: flex;
+    z-index: 1001;
   }
 
   .nav-menu {
-    flex-direction: column;
-    width: 100%;
-    height: 100vh;
-    position: absolute;
-    top: 80px;
+    position: fixed;
+    top: 0;
     right: -100%;
-    opacity: 0;
-    padding: 50px 0;
-    transition: all 0.5s ease;
-    background-color: rgba(10, 10, 35, 0.98);
-    overflow-y: auto; /* Ensure the menu is scrollable */
+    width: 80%;
+    height: 100vh;
+    flex-direction: column;
+    background: rgba(10, 10, 35, 0.98);
+    backdrop-filter: blur(10px);
+    padding: 80px 2rem 2rem;
+    transition: all 0.4s ease;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
   }
 
   .nav-menu.active {
     right: 0;
     opacity: 1;
-    z-index: 1;
+    visibility: visible;
   }
 
   .nav-item {
-    height: auto;
-    margin: 20px 0;
-  }
-
-  .nav-link {
-    text-align: center;
+    margin: 1.5rem 0;
     width: 100%;
-    display: block;
-    padding: 15px 0;
-    font-size: 1.5rem;
-  }
-
-  .nav-link::after {
-    display: none; /* Disable yellow line animation on mobile */
-  }
-
-  .nav-link.active {
-    background-color: rgba(255, 204, 0, 0.1);
-    border-radius: 8px;
-  }
-}
-
-@media (max-width: 768px) {
-  .menu-icon {
-    display: flex;
-  }
-
-  .nav-menu {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    position: absolute;
-    top: 60px;
-    left: 0;
-    background-color: rgb(18, 18, 62);
-    padding: 20px 0;
-    max-height: calc(100vh - 60px); /* Ensure the menu is scrollable */
-    overflow-y: auto; /* Enable vertical scrolling */
-  }
-
-  .nav-menu.active {
-    display: flex;
-  }
-
-  .nav-item {
-    margin: 10px 0;
-    text-align: center;
   }
 
   .nav-link {
     font-size: 1.2rem;
+    width: 100%;
+    text-align: left;
+    padding: 0.8rem 0;
+  }
+
+  .nav-link::after {
+    display: none;
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    background: rgba(65, 105, 225, 0.1);
+    padding-left: 1rem;
+  }
+
+  .menu-icon.active span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+  }
+
+  .menu-icon.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-icon.active span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
   }
 }
