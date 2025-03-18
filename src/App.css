@@ -28,19 +28,16 @@ body {
 
 /* App container */
 .app-container {
-  position: relative;
   min-height: 100vh;
-  width: 100%;
+  position: relative;
 }
 
 /* Main content area */
 .main-content {
-  padding-top: 80px; /* Match navbar height */
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  overflow-y: auto; /* Ensure content is scrollable */
+  position: relative;
+  z-index: 1;
+  padding-top: 80px; /* Space for fixed navbar */
+  min-height: calc(100vh - 80px);
 }
 
 /* Common section styles for all pages */
@@ -129,12 +126,12 @@ body {
 
 /* Particles background */
 #tsparticles {
-  position: fixed !important;
+  position: fixed;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
-  z-index: -1;
+  z-index: 0;
 }
 
 /* Ensure consistent page container styles for specific pages */
@@ -239,9 +236,10 @@ html {
 
 /* Page container for all pages */
 .page-container {
-  width: 100%;
+  position: relative;
+  z-index: 1;
+  padding: 2rem;
   max-width: 1200px;
-  padding: 100px 20px 40px;
   margin: 0 auto;
 }
 
@@ -459,4 +457,16 @@ html {
   .grid-4 {
     grid-template-columns: 1fr;
   }
+}
+
+/* Style for auth pages */
+.login-container,
+.register-container {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
 }

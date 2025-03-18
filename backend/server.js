@@ -1,53 +1,61 @@
 const express = require('express');
-const cors = require('cors');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const dotenv = require('dotenv');
-const contactRouter = require('./routes/contact');
+const path = require('path');
+
+// Import routes
+const authRouter = require('./routes/auth');
 const projectRouter = require('./routes/projects');
 const experienceRouter = require('./routes/experience');
-const authRouter = require('./routes/auth');
-const { protect } = require('./middleware/auth');
+const contactRouter = require('./routes/contact');
 
 // Load environment variables
 dotenv.config();
 
+// Create Express app
 const app = express();
 
-// Enable CORS for all requests
+// Middleware
 app.use(cors());
-
-// Parse JSON bodies
 app.use(express.json());
-
-// Test route
-app.get('/test', (req, res) => {
-  res.json({ message: 'Backend is running' });
-});
+app.use(express.urlencoded({ extended: true }));
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('Connected to MongoDB'))
-  .catch((err) => console.error('MongoDB connection error:', err));
+  .catch(err => {
+    console.error('MongoDB connection error:', err);
+    process.exit(1);
+  });
 
-// Routes
+// Use routes
 app.use('/api/auth', authRouter);
+app.use('/api/projects', projectRouter);
+app.use('/api/experience', experienceRouter);
 app.use('/api/contact', contactRouter);
-app.use('/api/projects', protect, projectRouter);
-app.use('/api/experience', protect, experienceRouter);
+
+// Test route
+app.get('/', (req, res) => {
+  res.json({ message: 'Backend API is running' });
+});
 
 // Error handling middleware
 app.use((err, req, res, next) => {
-  console.error('Error:', err);
-  res.status(500).json({ 
-    message: 'Something went wrong!',
-    error: process.env.NODE_ENV === 'development' ? err.message : undefined
-  });
+  console.error(err.stack);
+  res.status(500).json({ message: 'Something went wrong!' });
 });
 
-const PORT = process.env.PORT || 5000;
+// Serve static files in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../build')));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../build/index.html'));
+  });
+}
 
 // Start server
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`Backend server is running on http://localhost:${PORT}`);
-  console.log(`Frontend URL: http://localhost:3000`);
+  console.log(`Server running on port ${PORT}`);
 });

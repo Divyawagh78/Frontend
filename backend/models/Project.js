@@ -4,31 +4,31 @@ const projectSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
+    trim: true
   },
   description: {
     type: String,
-    required: true,
+    required: true
   },
-  imageUrl: {
+  image: {
     type: String,
+    required: true
   },
   technologies: [{
     type: String,
+    required: true
   }],
-  githubUrl: {
+  githubLink: {
     type: String,
+    required: true
   },
-  liveUrl: {
-    type: String,
-  },
-  featured: {
-    type: Boolean,
-    default: false,
+  liveLink: {
+    type: String
   },
   createdAt: {
     type: Date,
-    default: Date.now,
-  },
+    default: Date.now
+  }
 });
 
 module.exports = mongoose.model('Project', projectSchema); 

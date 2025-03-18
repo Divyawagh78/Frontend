@@ -94,6 +94,15 @@ const Navbar = () => {
               Contact
             </Link>
           </li>
+          <li className="nav-item">
+            <Link 
+              to="/admin/login" 
+              className="admin-link"
+              onClick={() => setMenuOpen(false)}
+            >
+              Admin
+            </Link>
+          </li>
         </ul>
       </div>
     </nav>

@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const auth = require('../middleware/auth');
 const Contact = require('../models/Contact');
 const nodemailer = require('nodemailer');
 
@@ -12,7 +13,17 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-// Submit contact form
+// Get all messages (protected)
+router.get('/', auth, async (req, res) => {
+  try {
+    const messages = await Contact.find().sort({ createdAt: -1 });
+    res.json(messages);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Send a message
 router.post('/', async (req, res) => {
   try {
     const { name, email, message } = req.body;
@@ -39,10 +50,23 @@ router.post('/', async (req, res) => {
 
     await transporter.sendMail(mailOptions);
 
-    res.status(201).json({ message: 'Message sent successfully!' });
+    res.status(201).json({ message: 'Message sent successfully' });
   } catch (error) {
     console.error('Contact form error:', error);
-    res.status(500).json({ message: 'Error sending message' });
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Delete a message (protected)
+router.delete('/:id', auth, async (req, res) => {
+  try {
+    const message = await Contact.findByIdAndDelete(req.params.id);
+    if (!message) {
+      return res.status(404).json({ message: 'Message not found' });
+    }
+    res.json({ message: 'Message deleted' });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
   }
 });
 
